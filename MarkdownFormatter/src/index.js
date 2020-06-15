@@ -323,9 +323,9 @@ export default class MarkdownFormatter extends React.Component {
                 if(elementStylesArray[index].indexOf('bulletText') === 0){
                     // eachWord = '\u2022 ' + eachWord;
                 }
-				tempJSX.push(<Text key={'list_item_' + index} style={this.state.userStyles.concat(elementStylesArray[index])}>{eachWord}</Text>)
+				tempJSX.push(<Text key={'list_item_' + index} numberOfLines={this.numberOfLines} style={this.state.userStyles.concat(elementStylesArray[index])}>{eachWord}</Text>)
             } else {                
-                tempJSX.push(<Text key={key} style={elementStylesArray[index]} onPress={() => this.addOnPress(elementLinksArray[index])}>{eachWord}</Text>)
+                tempJSX.push(<Text key={key} numberOfLines={this.numberOfLines} style={elementStylesArray[index]} onPress={() => this.addOnPress(elementLinksArray[index])}>{eachWord}</Text>)
 			}
 		});
 
@@ -333,14 +333,14 @@ export default class MarkdownFormatter extends React.Component {
 			let key = 'text__' + index;
 			if (elementStylesArray[index].indexOf('bulletText') !== -1 || elementStylesArray[index].indexOf('numberedText') !== -1) {
 				if(WrapJsx.length !== 0){
-					fullJsx.push(<Text key={key + WrapJsx.length + "wrap_list"} style={this.state.userStyles} >{WrapJsx}</Text>);
+					fullJsx.push(<Text key={key + WrapJsx.length + "wrap_list"} numberOfLines={this.numberOfLines} style={this.state.userStyles} >{WrapJsx}</Text>);
 					WrapJsx = [];
 				}
 				partialJsx.push(tempJSX[index]);
 
 			} else { 
 				if(partialJsx.length !== 0){ 	              
-					fullJsx.push(<View key={key + "_list"} style={this.state.userStyles}><Text key={key + partialJsx.length + "_list"}>{partialJsx}</Text></View>);
+					fullJsx.push(<View key={key + "_list"} style={this.state.userStyles}><Text key={key + partialJsx.length + "_list"} numberOfLines={this.numberOfLines}>{partialJsx}</Text></View>);
 					partialJsx = [];
 				}
 				if(eachWord.trim() != "")
